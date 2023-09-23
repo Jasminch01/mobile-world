@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 
 const PhonesDetailsCard = ({ phone }) => {
   const {id, image, phone_name, price, brand_name } = phone;
@@ -10,19 +11,20 @@ const PhonesDetailsCard = ({ phone }) => {
     if (!favouriteItmes) {
         favouriteList.push(phone)
         localStorage.setItem('favourite', JSON.stringify(favouriteList))
-        alert('success')
+        swal("Good job!", "Added Succesfuly", "success");
+
 
     }else{
         const isExixst = favouriteItmes.find(item => item.id == id);
         if(!isExixst){
             favouriteList.push(...favouriteItmes, phone);
             localStorage.setItem('favourite', JSON.stringify(favouriteList));
-            alert('success')
+            swal("Good job!", "Added Succesfuly", "success");
+           
         }else{
-            alert('error already exixt ')
+          swal("Error!", "Item Already Exixst!", "error");
         }
     }
-    console.log('added to favourite')
   }
 
   return (
